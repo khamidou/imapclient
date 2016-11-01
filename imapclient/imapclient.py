@@ -1029,6 +1029,18 @@ class IMAPClient(object):
                                        self._normalise_folder(folder),
                                        uid=True, unpack=True)
 
+
+    def move(self, messages, folder):
+        """Move one or more messages from the current folder to
+        *folder*. Returns the MOVE response string returned by the
+        server.
+        """
+        return self._command_and_check('move',
+                                       join_message_ids(messages),
+                                       self._normalise_folder(folder),
+                                       uid=True, unpack=True)
+
+
     def expunge(self):
         """Remove any messages from the currently selected folder that
         have the ``\\Deleted`` flag set.
